@@ -1,0 +1,23 @@
+{
+  "name": "x-comment-expert",
+  "displayName": "X Comment Expert",
+  "description": "Generate and stage thoughtful X comment drafts from the user's Following timeline without publishing.",
+  "version": "1.0.0",
+  "author": "Martin",
+  "type": "skill",
+  "category": "social",
+  "tags": ["x", "comment", "engagement", "browser"],
+  "scenarios": [
+    "increase-engagement",
+    "draft-x-comments",
+    "review-following-timeline"
+  ],
+  "path": "skills/x-comment-expert",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "compatibility": {
+    "codexSkill": true,
+    "mcp": false,
+    "plugin": false
+  }
+}
