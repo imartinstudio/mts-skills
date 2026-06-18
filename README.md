@@ -33,6 +33,7 @@ public marketplace for skills, MCP integrations, and plugins.
 | `mcp-tool-wrapper` | mcp | integration | wrap-api, expose-tool | mcp, tool, integration |
 | `plugin-manifest-review` | plugin | quality | review-plugin, validate-manifest | plugin, manifest, review |
 | `x-comment-expert` | skill | social | increase-engagement, draft-x-comments, review-following-timeline | x, comment, engagement, browser |
+| `x-traffic-assistant` | skill | social | drive-traffic-from-x, find-related-high-traffic-posts, draft-x-replies-with-link | x, traffic, comment, search |
 
 ## Capability Model
 

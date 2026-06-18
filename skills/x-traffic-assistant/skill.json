@@ -1,0 +1,23 @@
+{
+  "name": "x-traffic-assistant",
+  "displayName": "X Traffic Assistant",
+  "description": "Find related high-traffic X posts and stage natural replies that can link back to the user's source post.",
+  "version": "1.0.0",
+  "author": "Martin",
+  "type": "skill",
+  "category": "social",
+  "tags": ["x", "traffic", "comment", "search"],
+  "scenarios": [
+    "drive-traffic-from-x",
+    "find-related-high-traffic-posts",
+    "draft-x-replies-with-link"
+  ],
+  "path": "skills/x-traffic-assistant",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "compatibility": {
+    "codexSkill": true,
+    "mcp": false,
+    "plugin": false
+  }
+}
