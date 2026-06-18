@@ -18,6 +18,8 @@ public marketplace for skills, MCP integrations, and plugins.
 .
 ├── README.md
 ├── LICENSE
+├── scripts/
+│   └── deepseek-draft.mjs
 └── skills/
     ├── _template/
     ├── codex-skill-author/
@@ -120,6 +122,51 @@ Until the CLI exists, use `rg` for search:
 ```sh
 rg "create-skill|mcp|plugin" skills README.md
 ```
+
+## Local Draft Generator
+
+The X-related skills can optionally use a lightweight DeepSeek draft generator:
+
+```sh
+node scripts/deepseek-draft.mjs < input.json
+```
+
+Required environment variable:
+
+```sh
+DEEPSEEK_API_KEY=...
+```
+
+Optional environment variables:
+
+```sh
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-chat
+```
+
+Dry-run without network or API key:
+
+```sh
+node scripts/deepseek-draft.mjs --example | node scripts/deepseek-draft.mjs --dry-run
+```
+
+This script is intentionally local and small. If its prompt and output shape
+stabilize, it can later be wrapped as an MCP server and packaged as a plugin.
+
+### Security Notes
+
+- Never commit `.env`; use `.env.example` as the template.
+- Only send public X post/comment text that is needed for drafting.
+- Do not send private messages, cookies, browser storage, screenshots, account
+  settings, API keys, personal files, or hidden page state to DeepSeek.
+- The script strips query strings from X URLs and truncates long text before
+  sending it to the API.
+- `--dry-run` prints the assembled prompt. Treat that output as sensitive when
+  it contains real post text.
+- The script performs basic output checks, but Codex must still review every
+  draft before writing it into the browser.
+- DeepSeek is an external provider. Any text sent to it leaves the local
+  machine and is subject to that provider's terms and privacy policy.
 
 ## Validation Rules
 

@@ -59,6 +59,46 @@ Write each draft as:
 Questions are allowed, but do not make every reply a question. Mix agreement,
 specific additions, concise reactions, and occasional open-ended questions.
 
+## DeepSeek Drafting
+
+If `scripts/deepseek-draft.mjs` exists and `DEEPSEEK_API_KEY` is configured,
+prefer it for draft generation. Codex still owns selection, safety checks,
+browser handling, and the no-publish boundary.
+
+Only send the minimum public target-post text needed for drafting. Do not send
+private messages, cookies, browser storage, screenshots, account settings,
+hidden page state, API keys, or personal files to DeepSeek.
+
+Call it with JSON input shaped like:
+
+```json
+{
+  "mode": "x-comment",
+  "posts": [
+    {
+      "author": "target author",
+      "text": "target post text",
+      "url": "https://x.com/user/status/id"
+    }
+  ],
+  "style": {
+    "tone": "natural, friendly, specific, human-like",
+    "length": "1-2 short sentences",
+    "language": "same-as-target",
+    "emoji": "sparingly"
+  },
+  "constraints": [
+    "Do not submit or publish.",
+    "Avoid generic praise.",
+    "Do not invent personal experience."
+  ],
+  "count": 1
+}
+```
+
+If the script fails, returns an unusable draft, or is not configured, draft with
+Codex directly and continue the workflow.
+
 ## Workflow
 
 1. Open or use the user's authenticated X session.
@@ -69,7 +109,8 @@ specific additions, concise reactions, and occasional open-ended questions.
 6. Select 30 posts.
 7. Split the selected posts into three batches of 10.
 8. For each batch:
-   - Generate one draft per post.
+   - Generate one draft per post, using the DeepSeek draft generator when
+     available.
    - Open each selected post in its own browser tab.
    - Place the matching draft into the reply input box.
    - Do not submit the reply.

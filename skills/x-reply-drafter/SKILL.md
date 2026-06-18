@@ -86,6 +86,45 @@ The reply should be:
 Use light emoji only when the target tone makes it feel natural. Do not force
 emoji into serious, technical, or sensitive replies.
 
+## DeepSeek Drafting
+
+If `scripts/deepseek-draft.mjs` exists and `DEEPSEEK_API_KEY` is configured,
+prefer it for draft generation. Codex still owns context reading, worth-replying
+judgment, browser handling, and the no-publish boundary.
+
+Only send the minimum public target-post text needed for drafting. Do not send
+private messages, cookies, browser storage, screenshots, account settings,
+hidden page state, API keys, or personal files to DeepSeek.
+
+Call it with JSON input shaped like:
+
+```json
+{
+  "mode": "x-reply",
+  "targetPost": {
+    "author": "target author",
+    "text": "target post or comment text",
+    "url": "https://x.com/user/status/id"
+  },
+  "style": {
+    "tone": "natural, specific, human-like",
+    "length": "1-2 short sentences",
+    "language": "same-as-target",
+    "emoji": "only when natural"
+  },
+  "constraints": [
+    "Generate exactly one best reply.",
+    "Avoid generic praise.",
+    "Do not invent personal experience.",
+    "Do not submit or publish."
+  ],
+  "count": 1
+}
+```
+
+If the script fails, returns an unusable draft, or is not configured, draft with
+Codex directly and continue the workflow.
+
 ## Link Policy
 
 Do not include links or traffic-driving content unless the user explicitly asks
@@ -106,7 +145,7 @@ If the user asks to include a link:
 3. Read the target and visible context.
 4. Determine whether it is worth replying.
 5. If it is not worth replying, stop and explain why.
-6. Draft one best reply.
+6. Draft one best reply, using the DeepSeek draft generator when available.
 7. Locate the correct reply input box for the target.
 8. Write the draft into the reply input box.
 9. Do not submit or publish.

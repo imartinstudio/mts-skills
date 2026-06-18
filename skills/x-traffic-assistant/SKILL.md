@@ -103,6 +103,49 @@ Avoid:
 - Asking every target author to read the post.
 - Posting the link where the relationship is weak.
 
+## DeepSeek Drafting
+
+If `scripts/deepseek-draft.mjs` exists and `DEEPSEEK_API_KEY` is configured,
+prefer it for draft generation. Codex still owns source-post analysis,
+candidate search, filtering, duplicate-reply checks, browser handling, and the
+no-publish boundary.
+
+Only send the minimum public source-post and target-post text needed for
+drafting. Do not send private messages, cookies, browser storage, screenshots,
+account settings, hidden page state, API keys, or personal files to DeepSeek.
+
+Call it with JSON input shaped like:
+
+```json
+{
+  "mode": "x-traffic",
+  "sourcePost": {
+    "text": "user source post text",
+    "url": "https://x.com/php_martin/status/id"
+  },
+  "targetPost": {
+    "author": "target author",
+    "text": "target post text",
+    "url": "https://x.com/user/status/id"
+  },
+  "style": {
+    "tone": "natural, specific, non-promotional",
+    "length": "1-2 short sentences",
+    "language": "same-as-target"
+  },
+  "constraints": [
+    "Respond to the target post first.",
+    "Identify a useful gap the source post complements.",
+    "Avoid first-person self-promotion.",
+    "Do not submit or publish."
+  ],
+  "count": 1
+}
+```
+
+If the script fails, returns an unusable draft, or is not configured, draft with
+Codex directly and continue the workflow.
+
 ## Workflow
 
 1. Open or use the user's authenticated X session.
@@ -116,7 +159,8 @@ Avoid:
 9. For each batch:
    - Recheck that the user's account has not already replied to each target
      post.
-   - Generate one draft per target post.
+   - Generate one draft per target post, using the DeepSeek draft generator
+     when available.
    - Open each selected target post in its own browser tab.
    - Place the matching draft into the reply input box.
    - Do not submit the reply.
