@@ -1,0 +1,23 @@
+{
+  "name": "x-reply-drafter",
+  "displayName": "X Reply Drafter",
+  "description": "Draft and stage one best natural reply for a single X post or comment without publishing.",
+  "version": "1.0.0",
+  "author": "Martin",
+  "type": "skill",
+  "category": "social",
+  "tags": ["x", "reply", "comment", "browser"],
+  "scenarios": [
+    "draft-single-x-reply",
+    "reply-to-x-post",
+    "reply-to-x-comment"
+  ],
+  "path": "skills/x-reply-drafter",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "compatibility": {
+    "codexSkill": true,
+    "mcp": false,
+    "plugin": false
+  }
+}
