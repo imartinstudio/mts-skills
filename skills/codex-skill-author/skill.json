@@ -1,0 +1,19 @@
+{
+  "name": "codex-skill-author",
+  "displayName": "Codex Skill Author",
+  "description": "Draft or improve Codex skills with clear trigger rules, workflows, and validation guidance.",
+  "version": "1.0.0",
+  "author": "Martin",
+  "type": "skill",
+  "category": "authoring",
+  "tags": ["codex", "skill", "writing"],
+  "scenarios": ["create-skill", "improve-skill"],
+  "path": "skills/codex-skill-author",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "compatibility": {
+    "codexSkill": true,
+    "mcp": false,
+    "plugin": false
+  }
+}

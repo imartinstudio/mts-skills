@@ -1,0 +1,19 @@
+{
+  "name": "example-name",
+  "displayName": "Example Name",
+  "description": "Use this template when creating a new marketplace capability.",
+  "version": "1.0.0",
+  "author": "Martin",
+  "type": "skill",
+  "category": "authoring",
+  "tags": ["template", "skill"],
+  "scenarios": ["create-skill"],
+  "path": "skills/example-name",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "compatibility": {
+    "codexSkill": true,
+    "mcp": false,
+    "plugin": false
+  }
+}

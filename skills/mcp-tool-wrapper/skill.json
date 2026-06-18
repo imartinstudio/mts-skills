@@ -1,0 +1,19 @@
+{
+  "name": "mcp-tool-wrapper",
+  "displayName": "MCP Tool Wrapper",
+  "description": "Design a small MCP wrapper around an existing local command, API, or workflow.",
+  "version": "1.0.0",
+  "author": "Martin",
+  "type": "mcp",
+  "category": "integration",
+  "tags": ["mcp", "tool", "integration"],
+  "scenarios": ["wrap-api", "expose-tool"],
+  "path": "skills/mcp-tool-wrapper",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "compatibility": {
+    "codexSkill": true,
+    "mcp": true,
+    "plugin": false
+  }
+}

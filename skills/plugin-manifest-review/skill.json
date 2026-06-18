@@ -1,0 +1,19 @@
+{
+  "name": "plugin-manifest-review",
+  "displayName": "Plugin Manifest Review",
+  "description": "Review plugin manifests for clarity, completeness, installability, and marketplace readiness.",
+  "version": "1.0.0",
+  "author": "Martin",
+  "type": "plugin",
+  "category": "quality",
+  "tags": ["plugin", "manifest", "review"],
+  "scenarios": ["review-plugin", "validate-manifest"],
+  "path": "skills/plugin-manifest-review",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "compatibility": {
+    "codexSkill": true,
+    "mcp": false,
+    "plugin": true
+  }
+}
