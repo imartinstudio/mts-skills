@@ -42,7 +42,10 @@ Before drafting:
 4. If replying to a comment, understand the parent post enough to avoid replying
    out of context.
 5. Check whether the user's account has already replied in the visible
-   conversation. If it has, tell the user and ask before writing another reply.
+   conversation. Inspect replies below the target post for the user's display
+   name and handle, such as `Martin` / `@php_martin`; treat that as a hard
+   duplicate signal. If it has, tell the user and ask before writing another
+   reply.
 
 ## Worth-Replying Check
 
@@ -134,8 +137,12 @@ If the user asks to include a link:
 
 - Respond to the target post first.
 - Add the link only when it is directly relevant.
-- Avoid first-person promotional phrasing such as "我也写了一篇", "我刚写过",
-  "I wrote", or "I also covered this".
+- Avoid first-person promotional phrasing or AI-flavored self-reference such as
+  "我也写了一篇", "我刚写过", "我刚写了篇", "我整理了", "我这里",
+  "我这篇", "我这边", "I wrote", or "I also covered this".
+- Present the link as a useful reference, checklist, concept map, or workflow
+  note. Do not describe it as "my post" or as something the user personally
+  wrote.
 - Prefer neutral handoff phrasing, such as "这里有一份更完整的拆解".
 
 ## Workflow
@@ -146,14 +153,33 @@ If the user asks to include a link:
 4. Determine whether it is worth replying.
 5. If it is not worth replying, stop and explain why.
 6. Draft one best reply, using the DeepSeek draft generator when available.
-7. Locate the correct reply input box for the target.
-8. Write the draft into the reply input box.
-9. Do not submit or publish.
-10. Tell the user the draft is staged for review.
+7. Locate the correct inline reply input box on the target page.
+8. Write the draft into the inline reply input box while keeping the target
+   page visible.
+9. After filling the inline reply input, verify that the inline reply button is
+   enabled. If it remains disabled or unusable even though the draft text is
+   present, only then may the agent fall back to opening the normal reply
+   composer.
+10. Do not submit or publish.
+11. Tell the user the draft is staged for review.
 
 ## Browser Handling
 
-- Use the normal X reply affordance when the reply input box is hidden.
+- Default to the inline reply composer on the target page. Prefer the visible
+  `发布你的回复` / `Post your reply` input beneath the post or target comment, so
+  the user can still inspect views, engagement, author context, and surrounding
+  replies.
+- Do not click the reply button or open `/compose/post` by default. The modal
+  composer hides page context and should be treated as a fallback, not the
+  normal path.
+- After filling the inline composer, check that the inline reply button is
+  enabled. Leave the draft there when it is enabled.
+- Fall back to the normal reply affordance/modal only when the inline composer
+  exists, accepts the draft text, but its inline reply button remains disabled
+  or otherwise cannot be used. When this fallback is used, report the affected
+  target and the reason.
+- If the inline reply box is absent or hidden, scroll the target page and check
+  the post detail page again before using any modal fallback.
 - For nested comments, make sure the reply box belongs to the intended comment,
   not the parent post or a different reply.
 - If multiple reply boxes are visible and the correct one is not obvious, stop

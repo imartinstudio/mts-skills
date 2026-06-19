@@ -45,6 +45,44 @@ Search using:
 Collect one round of up to 100 candidate posts, then stop collecting. Do not keep
 scrolling indefinitely after the 100-post collection round is complete.
 
+During this first collection round, collect only standalone original posts and
+quote posts. Do not collect ordinary replies or nested conversation comments.
+Filter replies immediately instead of carrying them into candidate ranking.
+
+Treat a candidate as an ordinary reply and exclude it when any of these signals
+are present:
+
+- The collected article text contains a reply marker such as `回复 @...` or
+  `Replying to @...`.
+- The candidate is only visible as a child comment in another conversation.
+- The candidate depends on a parent comment for meaning and is not a standalone
+  discussion starter.
+
+Quote posts are allowed when the user's source post can naturally complement the
+author's own quote text. Do not treat a quote post as invalid merely because it
+contains a quoted post below the author's own text.
+
+## Traffic Floor
+
+Before selecting targets, extract or visibly inspect each candidate's age,
+views, replies, reposts, and likes. Do not select candidates whose views or
+engagement cannot be inspected.
+
+Use these default minimums unless the user explicitly asks for a different
+threshold:
+
+- 0-6 hours old: at least 1,000 views, or clear evidence that views and
+  interactions are rising quickly.
+- 6-24 hours old: at least 3,000 views.
+- 24-72 hours old: at least 10,000 views, with recent replies or reposts still
+  appearing.
+- Older than 72 hours: skip by default unless the post has 50,000+ views and
+  active recent discussion.
+
+Do not use low-view posts to fill a batch. If fewer than 10 candidates meet the
+traffic floor and relevance standard, stage fewer than 10 and explain that the
+remaining candidates were below the traffic floor.
+
 ## Candidate Filtering
 
 From the collected candidates, select 30 posts.
@@ -62,6 +100,10 @@ Prioritize:
 Exclude:
 
 - Political, highly controversial, hostile, sexual, illegal, or unsafe content.
+- Ordinary reply posts, nested comments, or thread comments. Use only original
+  posts and quote posts as traffic targets.
+- Posts below the traffic floor, posts with hidden/unavailable views, or posts
+  whose engagement appears stale.
 - Pure ads, giveaway posts, obvious engagement bait, and low-signal marketing.
 - Posts where adding the user's link would look spammy or off-topic.
 - Posts that already cover the same angle as the user's source post, leaving no
@@ -80,8 +122,10 @@ Each draft should:
 - Add one concrete observation, implication, or useful angle.
 - Identify what the target post does not cover, and use the source post link as
   a complementary next step.
-- Include the user's source post link when it fits naturally.
-- Use neutral handoff phrasing for the link instead of first-person self-promotion.
+- Include the user's source post link only when it fits naturally.
+- Use neutral handoff phrasing for the link instead of first-person
+  self-promotion. Present the link as a useful reference, checklist,
+  explanation, or concept map, not as "my post".
 - Stay short: usually 1-2 sentences.
 - Sound like a real participant in the discussion, not an ad.
 - Use the same language as the target post unless the user asks otherwise.
@@ -97,11 +141,20 @@ Avoid:
 
 - Copy-pasting the same line across many posts.
 - Leading with the link before engaging with the target post.
-- First-person promotional phrasing such as "我也写了一篇", "我刚写过",
-  "I wrote", or "I also covered this".
+- First-person promotional phrasing or AI-flavored self-reference such as
+  "我也写了一篇", "我刚写过", "我刚写了篇", "我整理了", "我这里",
+  "我这篇", "我这边", "I wrote", or "I also covered this".
+- Phrases that make the user's post sound like an inserted ad, such as
+  "可以看看我的帖子", "这篇是我写的", "顺便引流一下", or equivalent wording.
 - Overpromising, clickbait, hashtags, or sales language.
 - Asking every target author to read the post.
 - Posting the link where the relationship is weak.
+
+Before writing any draft into X, run a wording self-check. If the draft contains
+first-person link promotion, "I/my" ownership language around the source post,
+or a generic "I wrote/整理/分享" bridge, rewrite it. Acceptable bridges should be
+content-centered, for example "这个概念框架可以对照看", "这里有一份更系统的拆解",
+"这份清单能补上工具和 Skill 的边界", or "相关流程可以参考这里".
 
 ## DeepSeek Drafting
 
@@ -152,21 +205,37 @@ Codex directly and continue the workflow.
 2. Open the user-provided source post URL.
 3. Analyze the source post into topic, keywords, and discussion angles.
 4. Search X for related high-traffic discussions.
-5. Collect one round of up to 100 candidate posts.
-6. Filter and rank candidates by relevance first, then traffic.
-7. Select 30 target posts.
-8. Split the 30 posts into three batches of 10.
-9. For each batch:
-   - Recheck that the user's account has not already replied to each target
-     post.
+5. Collect one round of up to 100 candidate posts, filtering out ordinary
+   replies during collection.
+6. Extract age, views, replies, reposts, and likes for each candidate where
+   visible.
+7. Filter out candidates below the traffic floor.
+8. Filter and rank original posts and quote posts by relevance first, then
+   traffic.
+9. Select up to 30 target posts.
+10. Split the selected posts into batches of up to 10.
+11. For each batch:
+   - Recheck that each target is an original post or quote post, not a reply.
+   - Recheck on the target post detail page that the user's account has not
+     already replied to each target post. Inspect the visible replies section
+     below the target post for the user's display name and handle, such as
+     `Martin` / `@php_martin`; do not rely only on search results.
+   - If an existing reply from the user's account is found, skip that target
+     immediately. Do not generate a new draft, do not write into the reply box,
+     and report it as `already replied`.
    - Generate one draft per target post, using the DeepSeek draft generator
      when available.
    - Open each selected target post in its own browser tab.
-   - Place the matching draft into the reply input box.
+   - Place the matching draft into the target page's inline reply input box,
+     keeping the original post page visible.
+   - After filling the inline reply input, verify that the inline reply button
+     on that page is enabled. If it remains disabled or unusable even though the
+     draft text is present, only then may the agent fall back to opening the
+     normal reply composer.
    - Do not submit the reply.
-10. After each batch of 10 is staged, pause and tell the user the batch is ready
-    for manual review.
-11. Continue to the next batch only after the user says to continue, such as
+12. After each batch is staged, pause and tell the user the batch is ready for
+    manual review.
+13. Continue to the next batch only after the user says to continue, such as
     "下一批".
 
 ## Drafting Heuristics
@@ -198,11 +267,29 @@ Bad structure:
 
 - Keep each selected target post in a separate tab.
 - Match drafts to tabs carefully before writing.
+- Before writing into a reply box, scan the target post itself. If it is a
+  reply post or nested comment, skip it and do not write a draft.
 - Before writing into a reply box, scan the visible conversation for an
-  existing reply from the user's account. If one exists, skip that target and do
-  not write another draft.
-- If a reply box is hidden, use the normal reply affordance to reveal it, then
-  stop before any publish action.
+  existing reply from the user's account. Treat `Martin` followed by
+  `@php_martin` in the replies below the target post as a hard duplicate signal.
+  If one exists, skip that target and do not write another draft.
+- If a duplicate reply is discovered after a draft was already inserted, clear
+  the draft immediately and report the target as skipped. Never leave a second
+  draft on a post that already has a reply from the user's account.
+- Default to the inline reply composer on the target post page. Prefer the
+  visible `发布你的回复` / `Post your reply` input beneath the post, so the user can
+  still inspect views, engagement, author context, and surrounding replies.
+- Do not click the post's reply button or open `/compose/post` by default. The
+  modal composer hides page context and should be treated as a fallback, not the
+  normal path.
+- After filling the inline composer, check that the inline reply button is
+  enabled. Leave the draft there when it is enabled.
+- Fall back to the normal reply affordance/modal only when the inline composer
+  exists, accepts the draft text, but its inline reply button remains disabled
+  or otherwise cannot be used. When this fallback is used, report the affected
+  post and the reason.
+- If the inline reply box is absent or hidden, scroll the target page and check
+  the post detail page again before using any modal fallback.
 - If X changes layout or blocks interaction, stop and report the issue.
 - If a draft cannot be safely inserted, leave that post untouched and move on.
 
