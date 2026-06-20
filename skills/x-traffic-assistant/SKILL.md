@@ -42,12 +42,23 @@ Search using:
 - People, tools, products, companies, models, or events mentioned in the post.
 - Natural-language discussion phrases that are likely to surface active threads.
 
-Collect one round of up to 100 candidate posts, then stop collecting. Do not keep
-scrolling indefinitely after the 100-post collection round is complete.
+### Hard Collection Rule
+
+- Count only eligible standalone original posts and quote posts toward the
+  100-post quota.
+- Never count, retain, or use as a substitute for quota: plain reposts,
+  ordinary replies, nested comments, thread comments, or any candidate that is
+  only visible as a child comment.
+- Continue scrolling until the eligible-post counter reaches 100. Do not end a
+  collection round because 100 raw or visible search results have been scanned.
+- End below 100 only when X search has clearly stopped loading additional
+  results. Report the eligible-post count and the exhaustion reason.
+- Once 100 eligible posts have been collected, stop scrolling. Apply traffic,
+  relevance, and safety filters only after this source-post quota is met.
 
 During this first collection round, collect only standalone original posts and
-quote posts. Do not collect ordinary replies or nested conversation comments.
-Filter replies immediately instead of carrying them into candidate ranking.
+quote posts. Filter replies immediately instead of carrying them into candidate
+ranking or counting them toward the quota.
 
 Treat a candidate as an ordinary reply and exclude it when any of these signals
 are present:
@@ -205,8 +216,9 @@ Codex directly and continue the workflow.
 2. Open the user-provided source post URL.
 3. Analyze the source post into topic, keywords, and discussion angles.
 4. Search X for related high-traffic discussions.
-5. Collect one round of up to 100 candidate posts, filtering out ordinary
-   replies during collection.
+5. Maintain an eligible-source-post counter. Collect 100 standalone original
+   or quote posts; reject replies, nested comments, and plain reposts before
+   counting. End below 100 only after X search is exhausted, and report why.
 6. Extract age, views, replies, reposts, and likes for each candidate where
    visible.
 7. Filter out candidates below the traffic floor.

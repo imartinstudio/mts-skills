@@ -2,7 +2,7 @@
   "name": "x-traffic-assistant",
   "displayName": "X Traffic Assistant",
   "description": "Find related high-traffic X posts and stage natural replies that can link back to the user's source post.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Martin",
   "type": "skill",
   "category": "social",

@@ -1,0 +1,19 @@
+{
+  "name": "review-code-changes",
+  "displayName": "深度代码审查",
+  "description": "审查当前代码改动的兼容性、副作用、边界、安全、测试与维护风险。",
+  "version": "1.0.0",
+  "author": "Martin",
+  "type": "skill",
+  "category": "quality",
+  "tags": ["code-review", "diff", "compatibility", "testing", "security"],
+  "scenarios": ["review-current-diff", "review-pull-request", "find-regressions"],
+  "path": "skills/review-code-changes",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "compatibility": {
+    "codexSkill": true,
+    "mcp": false,
+    "plugin": false
+  }
+}

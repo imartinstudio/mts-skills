@@ -20,12 +20,19 @@ review.
 ## Source Scope
 
 - Use the X Following timeline as the default source.
-- Collect exactly one round of up to 100 visible posts, then stop collecting.
-- Do not continue scrolling after the 100-post collection round is complete.
-- Include original posts and quote posts.
-- Skip plain reposts, ordinary replies, nested comments, and thread comments.
-- During collection, filter out any candidate whose visible article text
-  contains a reply marker such as `回复 @...` or `Replying to @...`.
+
+### Hard Collection Rule
+
+- Count only eligible original posts and quote posts toward the 100-post quota.
+- Never count, retain, or use as a substitute for quota: plain reposts,
+  ordinary replies, nested comments, thread comments, or any item with a
+  visible reply marker such as `回复 @...` or `Replying to @...`.
+- Continue scrolling until the eligible-post counter reaches 100. Do not end a
+  collection round because 100 raw or visible timeline items have been scanned.
+- End below 100 only when the Following timeline has clearly stopped loading
+  additional posts. Report the eligible-post count and the exhaustion reason.
+- Once 100 eligible posts have been collected, stop scrolling. Apply safety,
+  recency, and engagement filters only after this source-post quota is met.
 
 ## Engagement Floor
 
@@ -36,10 +43,13 @@ engagement cannot be inspected.
 Use these default minimums unless the user explicitly asks for a different
 threshold:
 
-- 0-6 hours old: at least 1,000 views, or clear evidence that views and
+- 0-1 hour old: at least 100 views.
+- 1-6 hours old: at least 1,000 views, or clear evidence that views and
   interactions are rising quickly.
 - 6-24 hours old: at least 3,000 views.
-- 24-72 hours old: at least 10,000 views, with recent replies or reposts still
+- 24-48 hours old: at least 5,000 views. Keep qualifying posts as `补充候选`
+  during the main 100-post filtering pass.
+- 48-72 hours old: at least 10,000 views, with recent replies or reposts still
   appearing.
 - Older than 72 hours: skip by default unless the post has 50,000+ views and
   active recent discussion.
@@ -47,6 +57,20 @@ threshold:
 Do not use low-view posts to fill a batch. If fewer than 10 candidates meet the
 engagement floor and quality standard, stage fewer than 10 and explain that the
 remaining candidates were below the engagement floor.
+
+### Conditional Backfill
+
+During the main 100-post filtering pass, build and rank a `补充候选` pool that
+passes every source, safety, relevance, duplicate, and natural-comment check.
+Only when the standard pass leaves fewer than 10 candidates, select from this
+already-filtered pool in this order until the batch is full:
+
+- 1-3 hours old: at least 500 views.
+- 24-48 hours old: at least 5,000 views.
+
+Do not use backfill to relax source eligibility, safety, relevance, duplicate,
+or natural-comment checks. Label every selected backfill post as `补充` in the
+batch report.
 
 ## Filtering
 
@@ -78,7 +102,10 @@ Exclude posts that:
 Write each draft as:
 
 - Natural, friendly, and specific.
-- Short: usually 1-2 sentences.
+- Default to one concise sentence. Use a second sentence only when the post
+  genuinely needs a specific supporting angle, implication, or question.
+- Match the reply length to the source material; do not turn a brief post into
+  a paragraph-length explanation.
 - Opinionated enough to be worth posting.
 - Human-sounding, not formulaic or praise-only.
 - In the same language as the source post unless the user asks otherwise.
@@ -116,14 +143,15 @@ Call it with JSON input shaped like:
   ],
   "style": {
     "tone": "natural, friendly, specific, human-like",
-    "length": "1-2 short sentences",
+    "length": "one concise sentence by default; two short sentences only when needed",
     "language": "same-as-target",
     "emoji": "sparingly"
   },
   "constraints": [
     "Do not submit or publish.",
     "Avoid generic praise.",
-    "Do not invent personal experience."
+    "Do not invent personal experience.",
+    "Use one concise sentence by default; avoid paragraph-length replies."
   ],
   "count": 1
 }
@@ -136,7 +164,9 @@ Codex directly and continue the workflow.
 
 1. Open or use the user's authenticated X session.
 2. Navigate to the Following timeline.
-3. Collect one batch of up to 100 posts.
+3. Maintain an eligible-source-post counter. Collect 100 original or quote
+   posts; reject replies, nested comments, and plain reposts before counting.
+   End below 100 only after the Following timeline is exhausted, and report why.
 4. Remove skipped items such as plain reposts, ordinary replies, nested
    comments, and unsafe or low-signal posts.
 5. Extract age, views, replies, reposts, and likes for each candidate where
@@ -176,6 +206,7 @@ Avoid:
 - "Great point" as a complete reply.
 - Generic praise with no added value.
 - Overly long explanations.
+- Expanding a simple reaction into a full argument or mini-essay.
 - Hashtags, sales language, or obvious growth tactics.
 - Claims about the user's experience that are not supported by context.
 
