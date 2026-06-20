@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+
+*.log
+*.tmp
+tmp/
+temp/
+
+deepseek-input*.json
+deepseek-output*.json
