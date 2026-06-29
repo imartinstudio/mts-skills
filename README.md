@@ -32,6 +32,7 @@ public marketplace for skills, MCP integrations, and plugins.
 | Name | Type | Category | Scenarios | Tags |
 | --- | --- | --- | --- | --- |
 | `codex-skill-author` | skill | authoring | create-skill, improve-skill | codex, skill, writing |
+| `codex-reset-time-query` | skill | automation | query-codex-reset-time, check-codex-quota, explain-codex-rate-limit | codex, reset-time, quota, rate-limit, account |
 | `mcp-tool-wrapper` | mcp | integration | wrap-api, expose-tool | mcp, tool, integration |
 | `plugin-manifest-review` | plugin | quality | review-plugin, validate-manifest | plugin, manifest, review |
 | `review-code-changes` | skill | quality | review-current-diff, review-pull-request, find-regressions | code-review, diff, compatibility, testing, security |
