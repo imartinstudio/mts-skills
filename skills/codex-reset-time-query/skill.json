@@ -1,0 +1,19 @@
+{
+  "name": "codex-reset-time-query",
+  "displayName": "Codex 重置时间查询",
+  "description": "查询 Codex 额度、限流、任务冷却或订阅权益的重置与到期时间。",
+  "version": "1.0.0",
+  "author": "Martin",
+  "type": "skill",
+  "category": "automation",
+  "tags": ["codex", "reset-time", "quota", "rate-limit", "account"],
+  "scenarios": ["query-codex-reset-time", "check-codex-quota", "explain-codex-rate-limit"],
+  "path": "skills/codex-reset-time-query",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "compatibility": {
+    "codexSkill": true,
+    "mcp": false,
+    "plugin": false
+  }
+}
