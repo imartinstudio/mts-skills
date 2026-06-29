@@ -2,7 +2,7 @@
   "name": "x-comment-expert",
   "displayName": "X Comment Expert",
   "description": "Generate and stage thoughtful X comment drafts from the user's Following timeline without publishing.",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "author": "Martin",
   "type": "skill",
   "category": "social",

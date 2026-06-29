@@ -65,6 +65,7 @@ passes every source, safety, relevance, duplicate, and natural-comment check.
 Only when the standard pass leaves fewer than 10 candidates, select from this
 already-filtered pool in this order until the batch is full:
 
+- 0-1 hour old: no view floor. Use this only as the final backfill tier.
 - 1-3 hours old: at least 500 views.
 - 24-48 hours old: at least 5,000 views.
 
@@ -102,13 +103,20 @@ Exclude posts that:
 Write each draft as:
 
 - Natural, friendly, and specific.
-- Default to one concise sentence. Use a second sentence only when the post
-  genuinely needs a specific supporting angle, implication, or question.
+- Vary the rhythm across a batch: favor concise one-sentence replies, mix in
+  occasional two-sentence replies, and use a short line break only when it
+  creates a natural pause or emphasis. Do not make every reply follow the same
+  template or length.
 - Match the reply length to the source material; do not turn a brief post into
   a paragraph-length explanation.
 - Opinionated enough to be worth posting.
 - Human-sounding, not formulaic or praise-only.
 - In the same language as the source post unless the user asks otherwise.
+- Use punctuation as people naturally do: end with a period, question mark,
+  exclamation mark, or no terminal punctuation when appropriate. Do not force
+  a comma-ended cadence.
+- Use at most one context-appropriate emoji when it adds warmth or emphasis;
+  most drafts need none. Never use emoji as a substitute for a specific point.
 - No first-person promotional phrasing or AI-flavored self-reference such as
   "我也写了一篇", "我刚写过", "我刚写了篇", "我整理了", "我这里",
   "我这篇", "我这边", "I wrote", or "I also covered this".
@@ -143,15 +151,16 @@ Call it with JSON input shaped like:
   ],
   "style": {
     "tone": "natural, friendly, specific, human-like",
-    "length": "one concise sentence by default; two short sentences only when needed",
+    "length": "varied: concise one sentence by default; occasional two short sentences or a natural line break when needed",
     "language": "same-as-target",
-    "emoji": "sparingly"
+    "emoji": "at most one context-appropriate emoji; usually none"
   },
   "constraints": [
     "Do not submit or publish.",
     "Avoid generic praise.",
     "Do not invent personal experience.",
-    "Use one concise sentence by default; avoid paragraph-length replies."
+    "Vary length and punctuation naturally; avoid paragraph-length replies.",
+    "Use a line break only for a natural pause or emphasis; do not force a uniform ending style."
   ],
   "count": 1
 }
@@ -190,6 +199,17 @@ Codex directly and continue the workflow.
 11. After each batch is staged, pause and tell the user the batch is ready for
    manual review.
 12. Continue to the next batch only after the user asks to proceed.
+
+### Draft-tab Persistence
+
+- Before ending any browser session, preserve every staged draft tab from the
+  current and earlier batches, not only the tabs created most recently.
+- Reclaim already-open staged tabs when needed, include them together with new
+  tabs in the final keep list, and verify that the visible staged-tab count
+  matches the intended batch total before reporting success.
+- If the count does not match, restore the missing tabs and drafts before
+  responding; do not claim that a batch is ready based only on an intermediate
+  tab count.
 
 ## Drafting Heuristics
 
