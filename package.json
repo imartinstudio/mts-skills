@@ -1,0 +1,17 @@
+{
+  "name": "mts-skills",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local marketplace CLI for MTS Skills.",
+  "type": "module",
+  "bin": {
+    "mts": "scripts/mts.mjs"
+  },
+  "scripts": {
+    "mts": "node scripts/mts.mjs",
+    "validate": "node scripts/mts.mjs validate"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -36,6 +36,8 @@ public marketplace for skills, MCP integrations, and plugins.
 | `plugin-manifest-review` | plugin | quality | review-plugin, validate-manifest | plugin, manifest, review |
 | `review-code-changes` | skill | quality | review-current-diff, review-pull-request, find-regressions | code-review, diff, compatibility, testing, security |
 | `x-comment-expert` | skill | social | increase-engagement, draft-x-comments, review-following-timeline | x, comment, engagement, browser |
+| `x-imartinstudio-appeal` | skill | social | analyze-imartinstudio-suspension, draft-imartinstudio-appeal, update-imartinstudio-evidence | x, appeal, suspension, gmail, account-security |
+| `x-php-martin-appeal` | skill | social | analyze-php-martin-suspension, draft-php-martin-appeal, review-php-martin-163-mail | x, appeal, suspension, 163-mail, account-security |
 | `x-reply-drafter` | skill | social | draft-single-x-reply, reply-to-x-post, reply-to-x-comment | x, reply, comment, browser |
 | `x-traffic-assistant` | skill | social | drive-traffic-from-x, find-related-high-traffic-posts, draft-x-replies-with-link | x, traffic, comment, search |
 
@@ -96,33 +98,43 @@ Use three discovery axes:
 - Tags: flexible keywords, such as `codex`, `mcp`, `browser`, `pdf`, `video`, or `github`.
 - Scenarios: task-oriented search terms, such as `create-skill`, `publish-article`, `review-plugin`, or `wrap-api`.
 
-## CLI Direction
+## CLI
 
-The first CLI should stay shell-friendly and predictable.
+`mts` 是一个零依赖的本地命令行工具，用于搜索、校验和安装本仓库中的能力。需要 Node.js 18 或更高版本。
 
-Target commands:
+在仓库根目录中使用：
 
 ```sh
-mts search <query>
-mts install <name>
-mts update <name>
-mts uninstall <name>
-mts validate
+npm run mts -- search <query>
+npm run mts -- install <name>
+npm run mts -- update <name>
+npm run mts -- uninstall <name>
+npm run validate
 ```
 
-Initial behavior:
+也可在本机全局安装命令：
+
+```sh
+npm link
+mts search code-review
+```
+
+默认安装目录是 `~/.codex/skills`。执行 `install`、`update` 或 `uninstall` 才会写入该目录；可用 `--target <目录>` 改为项目级或其他目标目录。为防止意外覆盖，同名安装已存在时需要传入 `--force`；`--link` 会创建软链接而非复制文件。
+
+```sh
+mts install review-code-changes
+mts install review-code-changes --target .agents/skills
+mts update review-code-changes --link
+mts uninstall review-code-changes
+```
+
+命令行为：
 
 - `search`: match name, description, tags, and scenarios.
-- `install`: copy or link a capability into a local Codex skill/plugin location.
-- `update`: refresh an installed capability from this repository.
-- `uninstall`: remove the installed copy or link.
+- `install`: 复制或软链接能力至本地 Codex 技能目录或指定目录。
+- `update`: 用市场中的当前版本替换已安装版本。
+- `uninstall`: 移除已安装的副本或链接。
 - `validate`: check required files, JSON metadata, and path consistency.
-
-Until the CLI exists, use `rg` for search:
-
-```sh
-rg "create-skill|mcp|plugin" skills README.md
-```
 
 ## Local Draft Generator
 
