@@ -36,6 +36,7 @@ public marketplace for skills, MCP integrations, and plugins.
 | `mcp-tool-wrapper` | mcp | integration | wrap-api, expose-tool | mcp, tool, integration |
 | `plugin-manifest-review` | plugin | quality | review-plugin, validate-manifest | plugin, manifest, review |
 | `review-code-changes` | skill | quality | review-current-diff, review-pull-request, find-regressions | code-review, diff, compatibility, testing, security |
+| `x-action-approval-gate` | skill | social | review-x-action-before-publish, gate-tweetclaw-openclaw-actions, stage-social-actions-safely | x, approval, safety, browser, tweetclaw, openclaw |
 | `x-comment-expert` | skill | social | increase-engagement, draft-x-comments, review-following-timeline | x, comment, engagement, browser |
 | `x-imartinstudio-appeal` | skill | social | analyze-imartinstudio-suspension, draft-imartinstudio-appeal, update-imartinstudio-evidence | x, appeal, suspension, gmail, account-security |
 | `x-php-martin-appeal` | skill | social | analyze-php-martin-suspension, draft-php-martin-appeal, review-php-martin-163-mail | x, appeal, suspension, 163-mail, account-security |
