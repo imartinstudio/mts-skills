@@ -2,7 +2,7 @@
   "name": "x-imartinstudio-appeal",
   "displayName": "X @iMartinstudio Appeal",
   "description": "Analyze X account @iMartinstudio suspension evidence and draft fact-grounded appeals without submitting them.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Martin",
   "type": "skill",
   "category": "social",
