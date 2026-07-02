@@ -185,7 +185,7 @@ Call it with JSON input shaped like:
   "mode": "x-traffic",
   "sourcePost": {
     "text": "user source post text",
-    "url": "https://x.com/php_martin/status/id"
+    "url": "https://x.com/source_user/status/id"
   },
   "targetPost": {
     "author": "target author",
@@ -230,8 +230,8 @@ Codex directly and continue the workflow.
    - Recheck that each target is an original post or quote post, not a reply.
    - Recheck on the target post detail page that the user's account has not
      already replied to each target post. Inspect the visible replies section
-     below the target post for the user's display name and handle, such as
-     `Martin` / `@php_martin`; do not rely only on search results.
+     below the target post for the acting account's display name and handle
+     when safely visible; do not rely only on search results.
    - If an existing reply from the user's account is found, skip that target
      immediately. Do not generate a new draft, do not write into the reply box,
      and report it as `already replied`.
@@ -282,9 +282,10 @@ Bad structure:
 - Before writing into a reply box, scan the target post itself. If it is a
   reply post or nested comment, skip it and do not write a draft.
 - Before writing into a reply box, scan the visible conversation for an
-  existing reply from the user's account. Treat `Martin` followed by
-  `@php_martin` in the replies below the target post as a hard duplicate signal.
-  If one exists, skip that target and do not write another draft.
+  existing reply from the acting account. Treat an exact visible
+  display-name/handle match in the replies below the target post as a hard
+  duplicate signal. If one exists, skip that target and do not write another
+  draft.
 - If a duplicate reply is discovered after a draft was already inserted, clear
   the draft immediately and report the target as skipped. Never leave a second
   draft on a post that already has a reply from the user's account.

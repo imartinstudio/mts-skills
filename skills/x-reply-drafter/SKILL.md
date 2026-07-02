@@ -42,8 +42,8 @@ Before drafting:
 4. If replying to a comment, understand the parent post enough to avoid replying
    out of context.
 5. Check whether the user's account has already replied in the visible
-   conversation. Inspect replies below the target post for the user's display
-   name and handle, such as `Martin` / `@php_martin`; treat that as a hard
+   conversation. Inspect replies below the target post for the acting account's
+   display name and handle when safely visible; treat an exact match as a hard
    duplicate signal. If it has, tell the user and ask before writing another
    reply.
 
