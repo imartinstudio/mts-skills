@@ -1,0 +1,23 @@
+{
+  "name": "x-action-approval-gate",
+  "displayName": "X Action Approval Gate",
+  "description": "Review, stage, and gate X publishing or account actions before anything is submitted.",
+  "version": "1.0.0",
+  "author": "Martin",
+  "type": "skill",
+  "category": "social",
+  "tags": ["x", "approval", "safety", "browser", "tweetclaw", "openclaw"],
+  "scenarios": [
+    "review-x-action-before-publish",
+    "gate-tweetclaw-openclaw-actions",
+    "stage-social-actions-safely"
+  ],
+  "path": "skills/x-action-approval-gate",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "compatibility": {
+    "codexSkill": true,
+    "mcp": false,
+    "plugin": false
+  }
+}
