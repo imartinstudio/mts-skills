@@ -6,6 +6,7 @@
 *.tmp
 tmp/
 temp/
+.private/
 
 deepseek-input*.json
 deepseek-output*.json

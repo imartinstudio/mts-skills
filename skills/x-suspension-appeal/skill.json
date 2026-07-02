@@ -1,0 +1,24 @@
+{
+  "name": "x-suspension-appeal",
+  "displayName": "X Suspension Appeal",
+  "description": "Analyze X suspension evidence and draft privacy-safe appeal text without storing account-specific facts in the repository.",
+  "version": "1.0.0",
+  "author": "Martin",
+  "type": "skill",
+  "category": "social",
+  "tags": ["x", "appeal", "suspension", "account-security", "privacy"],
+  "scenarios": [
+    "analyze-x-suspension",
+    "draft-x-appeal",
+    "review-x-remediation-path",
+    "prepare-privacy-safe-appeal"
+  ],
+  "path": "skills/x-suspension-appeal",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "compatibility": {
+    "codexSkill": true,
+    "mcp": false,
+    "plugin": false
+  }
+}

@@ -237,9 +237,9 @@ Avoid:
 - Before writing into a reply box, scan the target post itself. If it is a
   reply post or nested comment, skip it and do not write a draft.
 - Before writing into a reply box, scan the visible replies below the target
-  post for an existing reply from the user's account. Treat `Martin` followed
-  by `@php_martin` as a hard duplicate signal. If one exists, skip that target
-  and do not write another draft.
+  post for an existing reply from the acting account. Treat an exact visible
+  display-name/handle match as a hard duplicate signal. If one exists, skip
+  that target and do not write another draft.
 - If a duplicate reply is discovered after a draft was already inserted, clear
   the draft immediately and report the target as skipped. Never leave a second
   draft on a post that already has a reply from the user's account.

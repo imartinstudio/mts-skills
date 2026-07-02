@@ -37,9 +37,8 @@ public marketplace for skills, MCP integrations, and plugins.
 | `plugin-manifest-review` | plugin | quality | review-plugin, validate-manifest | plugin, manifest, review |
 | `review-code-changes` | skill | quality | review-current-diff, review-pull-request, find-regressions | code-review, diff, compatibility, testing, security |
 | `x-comment-expert` | skill | social | increase-engagement, draft-x-comments, review-following-timeline | x, comment, engagement, browser |
-| `x-imartinstudio-appeal` | skill | social | analyze-imartinstudio-suspension, draft-imartinstudio-appeal, update-imartinstudio-evidence | x, appeal, suspension, gmail, account-security |
-| `x-php-martin-appeal` | skill | social | analyze-php-martin-suspension, draft-php-martin-appeal, review-php-martin-163-mail | x, appeal, suspension, 163-mail, account-security |
 | `x-reply-drafter` | skill | social | draft-single-x-reply, reply-to-x-post, reply-to-x-comment | x, reply, comment, browser |
+| `x-suspension-appeal` | skill | social | analyze-x-suspension, draft-x-appeal, review-x-remediation-path, prepare-privacy-safe-appeal | x, appeal, suspension, account-security, privacy |
 | `x-traffic-assistant` | skill | social | drive-traffic-from-x, find-related-high-traffic-posts, draft-x-replies-with-link | x, traffic, comment, search |
 
 ## Capability Model
